@@ -1,0 +1,404 @@
+﻿@model MiContact.ViewModel.ContactBig_ViewModel
+@{
+    ViewBag.Title = "About";
+}
+<p></p>
+
+<link href="~/assets/css/core.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/components.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/pages.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+    .thumb-xl {
+        height: 160px;
+        width: 160px;
+    }
+</style>
+
+
+<div class="container">
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15">
+                <button type="button" class="btn btn-custom dropdown-toggle waves-effect waves-light"
+                        data-toggle="dropdown" aria-expanded="false">
+                    Menu <span class="m-l-5"><i class="fa fa-cog"></i></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("New", "Contact", "Contact", new { isSaved = false }, null)</li>
+                    <li>@Html.ActionLink("Edit", "Edit", new { Id = Model.BasicInfo.BasicInfoID })</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { Id = Model.BasicInfo.BasicInfoID })</li>
+                </ul>
+            </div>
+            <h4 class="page-title">Profile</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-----New Profile-->
+        <div class="col-lg-3 col-md-6">
+            <div class="text-center card-box">
+                <div class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                        <i class="zmdi zmdi-more-vert"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("New", "Contact", "Contact", new { isSaved = false }, null)</li>
+                        <li>@Html.ActionLink("Edit", "Edit", new { Id = Model.BasicInfo.BasicInfoID })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Delete", "Delete", new { Id = Model.BasicInfo.BasicInfoID })</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="@Url.Content(Model.BasicInfo.ProfilePic)" class="img-circle thumb-xl img-thumbnail m-b-10" alt="profile-image" />
+                    @*<p class="text-muted font-13 m-b-30">
+                            @Model.BasicInfo.AboutMe
+                        </p>*@
+                    <div class="text-left">
+                        <p class="text-muted font-13"><strong>Full Name :</strong> <span class="m-l-15">@Model.BasicInfo.FirstName</span></p>
+                        <p class="text-muted font-13"><strong>Mobile :</strong><span class="m-l-15">@Model.BasicInfo.Mobile</span></p>
+                        <p class="text-muted font-13"><strong>Email :</strong> <span class="m-l-15">@Model.BasicInfo.Email</span></p>
+                        <p class="text-muted font-13 m-b-5"><strong>Location :</strong> <span class="m-l-15">@Model.BasicInfo.Address</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-----New Profile-->
+        <div class="col-lg-9">
+
+            <div class="bg-picture card-box">
+                <div class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                        <i class="zmdi zmdi-more-vert"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("New", "Contact", "Contact", new { isSaved = false }, null)</li>
+                        <li>@Html.ActionLink("Edit", "Edit", new { Id = Model.BasicInfo.BasicInfoID })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Delete", "Delete", new { Id = Model.BasicInfo.BasicInfoID })</li>
+                    </ul>
+                </div>
+
+                <div class="profile-info-name">
+                    @*<img src="@Url.Content(Model.BasicInfo.ProfilePic)" class="img-thumbnail" alt="profile-image" />*@
+                    <div class="profile-info-detail">
+                        <h3 class="m-t-0 m-b-0">@Model.BasicInfo.FirstName &nbsp; @Model.BasicInfo.LastName</h3>
+                        <p class="text-muted m-b-20"><i>@Model.BasicInfo.Profession</i></p>
+                        <p>
+                            @Model.BasicInfo.AboutMe
+                        </p>
+                        @*<div class="button-list m-t-20">
+                                <button type="button" class="btn btn-facebook btn-sm waves-effect waves-light">
+                                    <i class="fa fa-facebook"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-twitter waves-effect waves-light">
+                                    <i class="fa fa-twitter"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-linkedin waves-effect waves-light">
+                                    <i class="fa fa-linkedin"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-dribbble waves-effect waves-light">
+                                    <i class="fa fa-dribbble"></i>
+                                </button>
+                            </div>*@
+                    </div>
+
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <!----IMG-->
+            @*<div class="bg-picture card-box">
+                     <div class="row">
+                         <div class="row">
+                             <div class="col-md-9">
+                                 <h3>
+                                     Image Slider
+                                 </h3>
+                             </div>
+                             <div class="col-md-3">
+                                 <!-- Controls -->
+                                 <div class="controls pull-right hidden-xs">
+                                     <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example" data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example" data-slide="next"></a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+                         <!-- Wrapper for slides -->
+                         <div class="carousel-inner">
+                             <div class="item">
+                                 <div class="row">
+
+                                     @if (Model.Image_IE.Count() > 0)
+                                     {
+                                         foreach (var item in Model.Image_IE)
+                                         {
+                                             <div class="col-sm-3">
+                                                 <div class="col-item">
+                                                     <div class="photo">
+                                                         <img src="@Url.Content(item.URL)" class="img-responsive" alt="a">
+                                                     </div>
+                                                     <div class="info">
+                                                         <div class="row">
+                                                             <div class="price col-md-6">
+                                                                 <h5>
+                                                                     Sample Product
+                                                                 </h5>
+                                                                 <h5 class="price-text-color">
+                                                                     $199.99
+                                                                 </h5>
+                                                             </div>
+                                                             <div class="rating hidden-sm col-md-6">
+                                                                 <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                                 </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                                 </i><i class="fa fa-star"></i>
+                                                             </div>
+                                                         </div>
+                                                         <div class="separator clear-left">
+                                                             <p class="btn-add">
+                                                                 <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a>
+                                                             </p>
+                                                             <p class="btn-details">
+                                                                 <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a>
+                                                             </p>
+                                                         </div>
+                                                         <div class="clearfix">
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         }
+                                     }
+
+                                 </div>
+                             </div>
+                             <div class="item active">
+                                 <div class="row">
+
+                                     @if (Model.Image_IE.Count() > 0)
+                                     {
+                                         foreach (var item in Model.Image_IE)
+                                         {
+                                             <div class="col-sm-3">
+                                                 <div class="col-item">
+                                                     <div class="photo">
+                                                         <img src="@Url.Content(item.URL)" class="img-responsive" alt="a">
+                                                     </div>
+                                                     <div class="info">
+                                                         <div class="row">
+                                                             <div class="price col-md-6">
+                                                                 <h5>
+                                                                     Product with Variants
+                                                                 </h5>
+                                                                 <h5 class="price-text-color">
+                                                                     $199.99
+                                                                 </h5>
+                                                             </div>
+                                                             <div class="rating hidden-sm col-md-6">
+                                                                 <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                                 </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                                 </i><i class="fa fa-star"></i>
+                                                             </div>
+                                                         </div>
+                                                         <div class="separator clear-left">
+                                                             <p class="btn-add">
+                                                                 <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a>
+                                                             </p>
+                                                             <p class="btn-details">
+                                                                 <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">More details</a>
+                                                             </p>
+                                                         </div>
+                                                         <div class="clearfix">
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         }
+                                     }
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                </div>*@
+
+            <!----IMG-->
+        </div>
+
+        <!----TABS---->
+        <div class="col-lg-9">
+            <div class="card-box card-tabs">
+                <ul class="nav nav-pills pull-right">
+                    <li class="active">
+                        <a href="#Contact" data-toggle="tab" aria-expanded="true">Contact</a>
+                    </li>
+                    <li class="">
+                        <a href="#Social" data-toggle="tab" aria-expanded="false">Social</a>
+                    </li>
+                    <li class="">
+                        <a href="#Email" data-toggle="tab" aria-expanded="false">Email</a>
+                    </li>
+                    <li class="">
+                        <a href="#Image" data-toggle="tab" aria-expanded="false">Image</a>
+                    </li>
+                </ul>
+                <h4 class="header-title m-b-30">All Informations</h4>
+                <div class="tab-content">
+
+                    <div id="Contact" class="tab-pane fade in active">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-condensed table-hover">
+
+                                    @if (Model.Contact_IE.Count() > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(c => c.Contact.Name)
+                                            </td>
+                                            <td>
+                                                @Html.LabelFor(c => c.Contact.Number)
+                                            </td>
+                                            <td>
+                                                @Html.LabelFor(c => c.Contact.ContactType)
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <p>Nothing to Show here..</p>
+                                    }
+                                    @foreach (var item in Model.Contact_IE)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <label>@item.Name</label>
+                                            </td>
+                                            <td>
+                                                <label>@item.Number</label>
+                                            </td>
+                                            <td>
+                                                <label>@item.ContactType</label>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="Social" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-condensed table-hover">
+
+                                    @if (Model.Social_IE.Count() > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(c => c.Social.Link)
+                                            </td>
+                                            <td>
+                                                @Html.LabelFor(c => c.Social.URL)
+                                            </td>
+                                            <td>
+                                                @Html.LabelFor(c => c.Social.Description)
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <p>Nothing to Show here..</p>
+                                    }
+                                    @foreach (var item in Model.Social_IE)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <label>@item.Link</label>
+                                            </td>
+                                            <td>
+                                                <label>@item.URL</label>
+                                            </td>
+                                            <td>
+                                                <label>@item.Description</label>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="Email" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-condensed table-hover">
+                                    @if (Model.Email_IE.Count() > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.LabelFor(c => c.Email.EmailType)
+                                            </td>
+                                            <td>
+                                                @Html.LabelFor(c => c.Email.Email)
+                                            </td>
+                                            <td>
+                                                @Html.LabelFor(c => c.Email.Description)
+                                            </td>
+
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <p>Nothing to Show here..</p>
+                                    }
+                                    @foreach (var item in Model.Email_IE)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <label>@item.EmailType</label>
+                                            </td>
+                                            <td>
+                                                <label>@item.Email</label>
+                                            </td>
+                                            <td>
+                                                <label>@item.Description</label>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="Image" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if (Model.Image_IE.Count() > 0)
+                                {
+                                    foreach (var item in Model.Image_IE)
+                                    {
+                                        <div class="col-md-3 col-sm-3 hero-feature">
+                                            <div class="thumbnail">
+                                                <img src="@Url.Content(item.URL)" alt="@item.Name" />
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----TABS---->
+    </div>
+    <!-- end row -->
+
+</div>

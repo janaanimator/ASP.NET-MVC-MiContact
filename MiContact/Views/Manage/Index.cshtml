@@ -1,0 +1,267 @@
+﻿@model MiContact.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+
+
+
+<div id="exTab2" class="container">
+
+    <ul class="nav nav-tabs nav-justified">
+        <li class="@Model.Security_active">
+            <a href="#Security" data-toggle="tab">Security</a>
+        </li>
+        <li class="@Model.Profile_active">
+            <a href="#Profile" data-toggle="tab">Profile</a>
+        </li>
+        <li class="@Model.Images_active">
+            <a href="#Image" data-toggle="tab">Image Gallery</a>
+        </li>
+    </ul>
+
+    <div class="tab-content ">
+
+        <!------Security----->
+        <div class="tab-pane @Model.Security_active" id="Security">
+            <div>
+                <h4>Security Settings.</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>Password:</dt>
+                    <dd>
+                        [
+                        @if (Model.HasPassword)
+                        {
+                        @Html.ActionLink("Change your password", "ChangePassword")
+                        }
+                        else
+                        {
+                        @Html.ActionLink("Create", "SetPassword")
+                        }
+                        ]
+                    </dd>
+                    <dt>External Logins:</dt>
+                    <dd>
+                        @Model.Logins.Count [
+                        @Html.ActionLink("Manage", "ManageLogins") ]
+                    </dd>
+                    @*
+                        Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+                         See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                            for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+                         Uncomment the following block after you have set up two-factor authentication
+                    *@
+                    @*
+                        <dt>Phone Number:</dt>
+                        <dd>
+                            @(Model.PhoneNumber ?? "None") [
+                            @if (Model.PhoneNumber != null)
+                            {
+                                @Html.ActionLink("Change", "AddPhoneNumber")
+                                @: &nbsp;|&nbsp;
+                                @Html.ActionLink("Remove", "RemovePhoneNumber")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Add", "AddPhoneNumber")
+                            }
+                            ]
+                        </dd>
+                    *@
+                    <dt>Two-Factor Authentication:</dt>
+                    <dd>
+                        <p>
+                            There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                            for details on setting up this ASP.NET application to support two-factor authentication.
+                        </p>
+                        @*@if (Model.TwoFactor)
+                            {
+                                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <text>Enabled
+                                    <input type="submit" value="Disable" class="btn btn-link" />
+                                    </text>
+                                }
+                            }
+                            else
+                            {
+                                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <text>Disabled
+                                    <input type="submit" value="Enable" class="btn btn-link" />
+                                    </text>
+                                }
+                            }*@
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!------Security----->
+
+        <!------Profile----->
+        <div class="tab-pane @Model.Profile_active" id="Profile">
+            @using (Html.BeginForm("AspNetUserProfileInsert", "Manage", FormMethod.Post))
+            {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h4>Profile Settings.</h4>
+                <hr />
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AspNetUsersProfileViewModels.FirstName, htmlAttributes: new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.AspNetUsersProfileViewModels.FirstName, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AspNetUsersProfileViewModels.LastName, htmlAttributes: new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.AspNetUsersProfileViewModels.LastName, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AspNetUsersProfileViewModels.Dob, htmlAttributes: new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.AspNetUsersProfileViewModels.Dob, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AspNetUsersProfileViewModels.GenderID, htmlAttributes: new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(m => m.AspNetUsersProfileViewModels.GenderID,
+                           new SelectList(Model.AspNetUsersProfileViewModels.Genders, "GenderID", "Name"), "Select...",
+                           htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AspNetUsersProfileViewModels.Mobile, htmlAttributes: new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.AspNetUsersProfileViewModels.Mobile, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.AspNetUsersProfileViewModels.AboutMe, htmlAttributes: new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(m => m.AspNetUsersProfileViewModels.AboutMe, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-primary" value="Save Changes" />
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        <!------Profile----->
+
+        <!------Image----->
+        <div class="tab-pane @Model.Images_active" id="Image">
+            @using (Html.BeginForm("ImageInsert", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <h4>Profile Settings.</h4>
+                    <hr />
+                    <!-- Title -->
+                    <!-- /.row -->
+                    <!-- Page Features -->
+                    <div class="row text-center">
+
+                        @foreach (var item in Model.AspNetUserImages_IE)
+                        {
+                            <div class="col-md-3 col-sm-3 hero-feature" style="width:15%;">
+                                <div class="thumbnail">
+                                    <img src="@Url.Content(item.ImageURL)" alt="@item.ImageType">
+                                    <div class="caption">
+                                        <p>
+                                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        
+
+                        @*<div class="col-md-3 col-sm-3 hero-feature">
+                            <div class="thumbnail">
+                                <img src="http://placehold.it/800x500" alt="">
+                                <div class="caption">
+                                    <p>
+                                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 hero-feature">
+                            <div class="thumbnail">
+                                <img src="http://placehold.it/800x500" alt="">
+                                <div class="caption">
+                                    <p>
+                                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 hero-feature">
+                            <div class="thumbnail">
+                                <img src="http://placehold.it/800x500" alt="">
+                                <div class="caption">
+                                    <p>
+                                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>*@
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <div class="col-md-12">
+                    <table class="table table-bordered table-condensed table-hover">
+                        <tr>
+                            <td>@Html.LabelFor(m => m.AspNetUsersImagesViewModel.ImageType)</td>
+                            <td>@Html.LabelFor(m => m.AspNetUsersImagesViewModel.ImageDescription)</td>
+                            <td>@Html.LabelFor(m => m.AspNetUsersImagesViewModel.ImageURL)</td>
+                            <td>Option</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(m => m.AspNetUsersImagesViewModel.ImageType, new { @class = "form-control" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => m.AspNetUsersImagesViewModel.ImageDescription, new { @class = "form-control" })
+                            </td>
+                            <td>
+                                <input type="file" name="file" id="file" class="form-control" />        
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>                
+            }
+        </div>
+        <!------Image----->
+
+    </div>
+
+</div>

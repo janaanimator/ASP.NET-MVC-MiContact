@@ -1,0 +1,585 @@
+﻿@model MiContact.ViewModel.ContactBig_ViewModel
+@{
+    ViewBag.Title = "Contact";
+}
+<link href="~/assets/css/core.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/components.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/pages.css" rel="stylesheet" type="text/css" />
+<br />
+
+
+<style type="text/css">
+
+        .nav-tabs > .active > a, .nav-tabs > .active > a:focus, .nav-tabs > .active > a:hover {
+        border: 2px solid #fff !important;
+        border-bottom-color: #ffffff !important;
+    }
+
+        .tab-content {
+            padding: 8px;
+            border: 2px solid #fff;
+            border-top: none;
+        }
+
+        .card-box {
+            padding: 20px;
+            box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            background-clip: padding-box;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+
+        .zmdi {
+            display: inline-block;
+            font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .card-box .card-drop {
+            color: #98a6ad;
+            font-size: 20px;
+            line-height: 1px;
+            padding: 0px 5px;
+            display: inline-block;
+        }
+
+        .row {
+            margin-right: -10px;
+            margin-left: -10px;
+        }
+
+        /*.card-box .card-drop {
+            color: #98a6ad;
+            font-size: 20px;
+            line-height: 1px;
+            padding: 0px 5px;
+            display: inline-block;
+        }*/
+
+        .card-box {
+            padding: 0px;
+            box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            background-clip: padding-box;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+</style>
+
+<div class="container">
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15">
+                <button type="button" class="btn btn-custom dropdown-toggle waves-effect waves-light"
+                        data-toggle="dropdown" aria-expanded="false">
+                    Settings <span class="m-l-5"><i class="fa fa-cog"></i></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <h4 class="page-title">Profile</h4>
+        </div>
+    </div>
+</div>
+
+<div id="exTab2" class="container">
+
+    <ul class="nav nav-tabs nav-justified">
+
+        <li class="@Model.BasicActive">
+            <a href="#Basic" data-toggle="tab">Basic</a>
+        </li>
+
+        <li class="@Model.ContactActive">
+            <a href="#Contact" data-toggle="tab">Contact</a>
+        </li>
+
+        <li class="@Model.SocialActive">
+            <a href="#Social" data-toggle="tab">Social</a>
+        </li>
+
+        <li class="@Model.EmailActive">
+            <a href="#Email" data-toggle="tab">Email</a>
+        </li>
+
+        <li class="@Model.ImageActive">
+            <a href="#Image" data-toggle="tab">Image</a>
+        </li>
+
+    </ul>
+
+    <div class="tab-content">
+
+        <!------Basic Informaiton----->
+        <div class="tab-pane @Model.BasicActive" id="Basic">
+            @using (Html.BeginForm(Model.BasicAction, "Contact", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(g => g.BasicInfo.BasicInfoID)
+                <div class="form-horizontal">
+                    <h4>Basic Information.</h4>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.FirstName, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(c => c.BasicInfo.FirstName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.BasicInfo.FirstName, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.LastName, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(c => c.BasicInfo.LastName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.BasicInfo.LastName, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.GenderID, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(c => c.BasicInfo.GenderID, new SelectList(Model.BasicInfo.Genders, "GenderID", "Name"), "-Select-", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.BasicInfo.GenderID, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.DateOfBirth, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(c => c.BasicInfo.DateOfBirth, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.BasicInfo.DateOfBirth, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.Email, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(c => c.BasicInfo.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.BasicInfo.Email, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.Profession, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(c => c.BasicInfo.Profession, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.BasicInfo.Profession, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.Address, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(c => c.BasicInfo.Address, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.BasicInfo.Address, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.AboutMe, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(c => c.BasicInfo.AboutMe, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.BasicInfo.AboutMe, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.Mobile, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(c => c.BasicInfo.Mobile, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.BasicInfo.Mobile, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.BasicInfo.ProfilePic, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                <input type="file" name="file" id="file" class="form-control" src="@Model.BasicInfo.ProfilePic" />
+                                @Html.ValidationMessageFor(c => c.BasicInfo.ProfilePic, null, new { @class = "text-danger" })
+                                @Html.HiddenFor(c => c.BasicInfo.TempPicURL)
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-primary" value="@Model.BasicBtn" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!------Basic Informaiton----->
+        <!------Contact----->
+        <div class="tab-pane @Model.ContactActive" id="Contact">
+            <div class="form-horizontal">
+                <h4>Contact.</h4>
+                <div class="col-md-12">
+                    <table class="table table-bordered table-condensed table-hover">
+
+                        @if (Model.Contact_IE.Count() > 0)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(c => c.Contact.Name)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Contact.Number)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Contact.ContactType)
+                                </td>
+                                <td>Option</td>
+                            </tr>
+                        }
+
+                        @foreach (var item in Model.Contact_IE)
+                        {
+                            <tr>
+                                <td>
+                                    <label>@item.Name</label>
+                                </td>
+                                <td>
+                                    <label>@item.Number</label>
+                                </td>
+                                <td>
+                                    <label>@item.ContactType</label>
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "ContactEdit", "Contact", new { Id = item.ContactID }, new { @class = "btn btn-warning" })
+                                    @Html.ActionLink("Delete", "ContactDelete", "Contact", new { Id = item.ContactID }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12">
+                @using (Html.BeginForm(Model.ContactAction, "Contact", FormMethod.Post))
+                {
+                    if (Model.BasicInfo.BasicInfoID != 0)
+                    {
+                        @Html.HiddenFor(g => g.Contact.ContactID)
+                        <table class="table table-bordered table-condensed table-hover">
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(c => c.Contact.Name)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Contact.Number)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Contact.ContactType)
+                                </td>
+                                <td>Option</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(c => c.Contact.Name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.Contact.Name, null, new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(c => c.Contact.Number, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.Contact.Number, null, new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(c => c.Contact.ContactType, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.Contact.ContactType, null, new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary">@Model.ContactBtn</button>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="btn btn-lg btn-warning">In order To Proceed you need to Submit Basic Information.. :-(</p>
+                    }
+                }
+            </div>
+        </div>
+        <!------Contact----->
+        <!------Social----->
+        <div class="tab-pane @Model.SocialActive" id="Social">
+            <div class="form-horizontal">
+                <h4>Social.</h4>
+                <div class="col-md-12">
+                    <table class="table table-bordered table-condensed table-hover">
+
+                        @if (Model.Social_IE.Count() > 0)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(c => c.Social.Link)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Social.URL)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Social.Description)
+                                </td>
+                                <td>Option</td>
+                            </tr>
+                        }
+
+                        @foreach (var item in Model.Social_IE)
+                        {
+                            <tr>
+                                <td>
+                                    <label>@item.Link</label>
+                                </td>
+                                <td>
+                                    <label>@item.URL</label>
+                                </td>
+                                <td>
+                                    <label>@item.Description</label>
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "SocialEdit", "Contact", new { Id = item.SocialID }, new { @class = "btn btn-warning" })
+                                    @Html.ActionLink("Delete", "SocialDelete", "Contact", new { Id = item.SocialID }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12">
+                @using (Html.BeginForm(Model.SocialAction, "Contact", FormMethod.Post))
+                {
+                    if (Model.BasicInfo.BasicInfoID != 0)
+                    {
+                        @Html.HiddenFor(g => g.Social.SocialID)
+                        <table class="table table-bordered table-condensed table-hover">
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(c => c.Social.Link)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Social.URL)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Social.Description)
+                                </td>
+                                <td>Option</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(c => c.Social.Link, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.Social.Link, null, new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(c => c.Social.URL, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.Social.URL, null, new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(c => c.Social.Description, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.Social.Description, null, new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary">@Model.SocialBtn</button>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="btn btn-lg btn-warning">In order To Proceed you need to Submit Basic Information.. :-(</p>
+                    }
+                }
+            </div>
+        </div>
+        <!------Social----->
+        <!------Email----->
+        <div class="tab-pane @Model.EmailActive" id="Email">
+            <div class="form-horizontal">
+                <h4>Email.</h4>
+                <div class="col-md-12">
+                    <table class="table table-bordered table-condensed table-hover">
+                        @if (Model.Email_IE.Count() > 0)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(c => c.Email.EmailType)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Email.Email)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Email.Description)
+                                </td>
+                                <td>Option</td>
+                            </tr>
+                        }
+                        @foreach (var item in Model.Email_IE)
+                        {
+                            <tr>
+                                <td>
+                                    <label>@item.EmailType</label>
+                                </td>
+                                <td>
+                                    <label>@item.Email</label>
+                                </td>
+                                <td>
+                                    <label>@item.Description</label>
+                                </td>
+                                <td>
+
+                                    @Html.ActionLink("Edit", "EmailEdit", "Contact", new { Id = item.EmailID }, new { @class = "btn btn-warning" })
+                                    @Html.ActionLink("Delete", "EmailDelete", "Contact", new { Id = item.EmailID }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12">
+                @using (Html.BeginForm(Model.EmailAction, "Contact", FormMethod.Post))
+                {
+                    if (Model.BasicInfo.BasicInfoID != 0)
+                    {
+                        @Html.HiddenFor(g => g.Email.EmailID)
+                        <table class="table table-bordered table-condensed table-hover">
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(c => c.Email.EmailType)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Email.Email)
+                                </td>
+                                <td>
+                                    @Html.LabelFor(c => c.Email.Description)
+                                </td>
+                                <td>Option</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(c => c.Email.EmailType, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.Email.EmailType, null, new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(c => c.Email.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.Email.Email, null, new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(c => c.Email.Description, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.Email.Description, null, new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary">@Model.EmailBtn</button>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="btn btn-lg btn-warning">In order To Proceed you need to Submit Basic Information.. :-(</p>
+                    }
+
+                }
+            </div>
+        </div>
+        <!------Email----->
+        <!------Image----->
+        <div class="tab-pane @Model.ImageActive" id="Image">
+            <div class="form-horizontal">
+                <h4>Image.</h4>
+                <div class="col-md-12">
+                    @if (Model.Image_IE.Count() > 0)
+                    {
+                        foreach (var item in Model.Image_IE)
+                        {
+                            <div class="col-md-3 col-sm-3 hero-feature">
+                                <div class="card-box">
+                                    <div class="dropdown pull-right">
+                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown"
+                                           aria-expanded="false">
+                                            <i class="zmdi zmdi-more-vert"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                @Html.ActionLink("Delete", "ImageDelete", "Contact", new { Id = item.ImageID }, null)
+                                            </li>
+                                            <li>@Html.ActionLink("Edit", "ImageEdit", "Contact", new { Id = item.ImageID }, null)</li>
+
+                                            <li class="divider"></li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="thumbnail">
+                                        <img src="@Url.Content(item.URL)" alt="@item.Name" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <!-- /.row -->
+                </div>
+                <div class="col-md-12">
+                    @using (Html.BeginForm(Model.ImageAction, "Contact", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        if (Model.BasicInfo.BasicInfoID != 0)
+                        {
+                            @Html.HiddenFor(g => g.Image.ImageID)
+                            <table class="table table-bordered table-condensed table-hover">
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(c => c.Image.Name)
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(c => c.Image.URL)
+                                        @Html.HiddenFor(c => c.Image.TempPicURL)
+                                    </td>
+                                    <td>
+                                        @Html.LabelFor(c => c.Image.Description)
+                                    </td>
+                                    <td>Option</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(c => c.Image.Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(c => c.Image.Name, null, new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        <input type="file" name="file" id="file" class="form-control" />
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(c => c.Image.Description, new { @class = "form-control" })
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary">@Model.ImageBtn</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                        else
+                        {
+                            <p class="btn btn-lg btn-warning">In order To Proceed you need to Submit Basic Information.. :-(</p>
+                        }
+                    }
+                </div>
+            </div>
+            <!------Image----->
+        </div>
+        <!------Image----->
+
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

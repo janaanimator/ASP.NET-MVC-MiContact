@@ -1,0 +1,108 @@
+﻿@model  IEnumerable<MiContact.ViewModel.BasicInfo_IE>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<link href="~/assets/css/core.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/components.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/css/pages.css" rel="stylesheet" type="text/css" />
+<br />
+<div class="container">
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group pull-right m-t-15">
+                <button type="button" class="btn btn-custom dropdown-toggle waves-effect waves-light"
+                        data-toggle="dropdown" aria-expanded="false">
+                    Menu<span class="m-l-5"><i class="fa fa-cog"></i></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Add new", "Contact", "Contact", new { isSaved = false }, null)</li>
+                </ul>
+            </div>
+            <h4 class="page-title">Contacts</h4>
+        </div>
+    </div>
+    <!-- Page-Title -->
+    <!-- end row -->
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+        <div class="col-lg-3 col-md-6">
+            <div class="card-box widget-user">
+                <img src="@Url.Content(@item.ProfilePic)" class="img-responsive img-circle" alt="user">
+                <div class="wid-u-info">
+                    <h4 class="m-t-0 m-b-5 font-600">
+                        @Html.ActionLink(item.FirstName, "About", new { Id = item.BasicInfoID })
+                    </h4>
+                    <p class="text-muted m-b-5 font-13">@item.Email</p>
+                    <small class="text-warning"><b>@item.Profession</b></small>
+                </div>
+            </div>
+        </div>
+            }
+        }
+    </div>
+    <!-- end row -->
+
+    @section scripts{
+        <script type="text/javascript">
+
+
+            function Success() {
+                toastr.success("Inserted Successfully..", "", "");
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+            }
+
+
+
+
+
+
+            function Delete() {
+                toastr.warning("Deleted....", "", "");
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+
+            }
+
+        </script>
+    }
+
+
+</div>
